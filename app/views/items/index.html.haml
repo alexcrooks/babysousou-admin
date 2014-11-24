@@ -1,0 +1,33 @@
+%h1 Items
+
+.search-tool
+  = form_tag items_path, method: :get do
+    .input-group
+      = text_field_tag :query, @query, class: 'form-control'
+      %span.input-group-btn
+        = submit_tag :search, class: 'btn btn-default'
+
+%table.table.table-striped
+  %tr
+    %th
+    %th Title
+    %th Price
+    %th
+
+  - items = @query.blank? ? @items : @items.with_details
+
+  - items.each do |item, details|
+    %tr
+      %td= image_tag item.image_url, style: 'width: 100px'
+      %td
+        = link_to item_title(item, details), item_path(item)
+        %p
+          = item_source item
+          = link_to "#{icon 'external-link'}".html_safe, item.item_url, target: '_blank'
+      %td= item_price item
+      %td
+        = link_to "#{icon 'briefcase'}".html_safe, item_item_path(item, query: @query), class: 'btn btn-primary', remote: true, data: {toggle: 'modal', target: '#item-modal'}
+
+= paginate @items, theme: 'twitter-bootstrap-3'
+
+#item-modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}

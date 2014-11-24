@@ -1,0 +1,34 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+      %h3.modal-title= item_source item
+    .modal-body
+      .modal-body-content
+        .row
+          .col-md-5
+            = image_tag item.image_url, class: 'img-responsive'
+          .col-md-7
+            %h4= item.title
+            .product-code= "Product Code: ##{item.external_id}"
+            .product-price= item_price item
+            .product-description= truncate(item.description, length: 250)
+
+        .row.import-item
+          .col-md-12
+            %ul.nav.nav-tabs
+              %li.active
+                %a{"aria-expanded" => "true", "data-toggle" => "tab", :href => "#existing-item"} Existing Item
+              %li
+                %a{"aria-expanded" => "false", "data-toggle" => "tab", :href => "#new-item"} New Item
+            .tab-content
+              #existing-item.tab-pane.fade.active.in
+                = bootstrap_form_for item, url: import_with_existing_item_item_path(item, query: query), method: :put do |f|
+                  = f.select :babysousou_item, options_from_collection_for_select(babysousou_items, :id, :title), {}, {class: 'selectpicker', 'data-live-search' => true}
+                  = f.submit :import
+              #new-item.tab-pane.fade
+                = bootstrap_form_for item, url: import_with_new_item_item_path(item, query: query), method: :put, html: {id: 'import-with-new-item'} do |f|
+                  = f.fields_for :babysousou_item do |bf|
+                    = bf.text_field :title, value: item.babysousou_item.title, 'data-bv-notempty' => true, 'data-bv-notempty-message' => 'The title is required'
+                    = bf.text_area :description, value: item.babysousou_item.description
+                  = f.submit :import

@@ -1,0 +1,3 @@
+$("#item-modal").html("#{escape_javascript(render partial: 'items/partials/item_modal', locals: {item: @item, babysousou_items: @babysousou_items, query: @query})}");
+$("#import-with-new-item").bootstrapValidator();
+$(".selectpicker").selectpicker();

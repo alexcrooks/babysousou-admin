@@ -1,0 +1,21 @@
+%h1 Babysousou Items
+
+= paginate @babysousou_items, theme: 'twitter-bootstrap-3'
+
+%table.table.table-striped
+  %tr
+    %th
+    %th Title
+    %th Description
+    %th
+
+  - @babysousou_items.each do |babysousou_item|
+    %tr
+      %td= babysousou_item_image(babysousou_item)
+      %td= babysousou_item.title
+      %td= truncate(babysousou_item.description, length: 250)
+      %td.text-right
+        = link_to "#{icon 'search'}".html_safe, babysousou_item_path(babysousou_item), class: 'btn btn-primary'
+        = link_to "#{icon 'pencil'}".html_safe, edit_babysousou_item_path(babysousou_item), class: 'btn btn-primary'
+        = link_to "#{icon 'trash'}".html_safe, babysousou_item_path(babysousou_item), class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' }
+= paginate @babysousou_items, theme: 'twitter-bootstrap-3'

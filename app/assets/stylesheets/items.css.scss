@@ -1,0 +1,39 @@
+// Place all the styles related to the items controller here.
+// They will automatically be included in application.scss.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.product-title {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0.25px;
+  line-height: 1;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+.product-code {
+  font-size: 14px;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  margin: 0 0 5px;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.product-price {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 10px;
+}
+
+.import-item {
+  padding-top: 20px;
+}
+
+.tab-content {
+  padding-top: 10px;
+}
+
+.search-tool {
+  padding-bottom: 30px;
+}

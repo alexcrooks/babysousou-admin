@@ -1,0 +1,16 @@
+%h1= @babysousou_item.title
+
+.row
+  - @babysousou_item.items.each do |item|
+    .col-sm-6.col-md-4
+      .thumbnail
+        = link_to image_tag(item.image_url, class: 'img-responsive', style: 'height: 200px;'), item_path(item), target: '_blank'
+        .caption{style: 'height: 250px;'}
+          %h3
+            = link_to item.title, item_path(item), target: '_blank'
+            = item_source item
+          .product-code
+            = "Product Code: ##{item.external_id}"
+            = link_to "#{icon 'external-link'}".html_safe, item.item_url, target: '_blank'
+          .product-price= item_price item
+          %p= truncate(item.description, length: 100)

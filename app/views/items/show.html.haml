@@ -1,0 +1,8 @@
+.row
+  .col-sm-6
+    = image_tag @item.image_url, class: 'img-responsive'
+  .col-sm-6
+    .product-title= @item.title
+    .product-code= "Product Code: ##{@item.external_id}"
+    .product-price= item_price @item
+    %p= @item.description
